@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		body{ 
+			margin: 0;
+			font-family: 'Open Sans';
+			font-weight: 400;
+			color: #333;
+		}
+
+		.cf:before, .cf:after { content: " "; display: table; }
+		.cf:after { clear: both; }
+		.cf { *zoom: 1; }
+
+		.left{ float: left; } .right{ float: right; }
+
+		.main{
+			width: 780px;
+			margin: 0 auto;
+		}
+		h1.maptitle{
+			margin: 0 0 35px 0;
+			padding: 0 0 10px 0;
+			font-size: 28px;
+			font-weight: 700;
+			border-bottom: 1px solid #f1f1f1;
+		}
+		.category{
+			width: 175px;
+		}
+			.category ul{
+				margin: 0; padding: 0;
+			}
+				.category ul li{
+					margin: 0;
+					list-style: none;
+				}
+					.category ul li a{
+						display: block;
+						padding: 15px 20px;
+						color: #b2b2b2;
+						text-decoration: none;
+						border-right: 3px solid #f4f4f4;
+						transition: all .2s ease;
+					}
+
+						.category ul li.sel a{
+							background-color: #f7f7f7;
+							border-right: 3px solid #007cd7;
+							color: #333;
+						}
+
+						.category ul li a:hover{
+							background-color: #f9f9f9;
+							border-right: 3px solid #ccc;
+						}
+						.category ul li.sel a:hover{
+							background-color: #f7f7f7;
+							border-right: 3px solid #007cd7;
+						}
+
+		.sites{
+			width: 605px;
+		}
+			.sites ul{
+				margin: 0; padding: 0;
+				font-size: 0;
+			}
+				.sites ul li{
+					margin: 0;
+					padding: 10px 0 10px 20px;
+					width: 181px;
+					float: left;
+					display: inline-block;
+				}
+					.sites ul li a{
+						width: inherit;
+						font-size: 14px;
+						color: #333;
+						text-decoration: none;
+						text-overflow: ellipsis; 
+						display: block; 
+						overflow: hidden; 
+						white-space: nowrap;
+					}
+						.sites ul li a:hover{
+							color: #007cd7;
+						}
+	</style>
+</head>
+<body>
+	<div class="main cf">
+		<h1 class="maptitle">RSS</h1>
+		<div class="category left">
+			<ul>
+				<li class="sel"><a href="#" id="noticias">Notícias</a></li>
+				<li><a href="#" id="entrete">Entretenimento</a></li>
+				<li><a href="#" id="esportes">Esportes</a></li>
+			</ul>
+		</div>
+		<div class="sites left">
+			<ul class="cf"></ul>
+		</div>
+		<div class="test"></div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="links.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.sites > ul').html(links.noticias);
+
+			$('.category li > a').click(function(e) {
+				e.preventDefault();
+				var cat = $(this).attr('id');
+
+				$('.category li').removeClass('sel');
+				$('.category li #' + cat).parent().addClass('sel');
+
+				$('.sites > ul').html(links[cat]);
+			});
+		});
+	</script>
+</body>
+</html>
